@@ -1,15 +1,15 @@
 import Section from "./Section";
 import { EVENTS, RULES } from "@/lib/eventData";
 
-const icons = { quiz: "🤖", code: "⚔️", build: "💡", pitch: "🦈" };
+const icons = { quiz: "/img/TechAI.jpeg", code: "/img/Clash.jpeg", build: "/img/Build.jpeg", pitch: "/img/Shark.jpeg" };
 
 export default function Events() {
   return (
     <Section id="events" title="Events" subtitle="Four events. One registration.">
       <div className="grid gap-6 md:grid-cols-2">
         {EVENTS.map((e) => (
-          <article key={e.id} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="text-4xl">{icons[e.id]}</div>
+          <article key={e.id} className="rounded-4xl border border-white bg-white/5 p-6">
+            <div className="text-4xl"><img src={icons[e.id]} alt=""  height={100} width={100} className="rounded-2xl shadow-md shadow-white" /></div>
             <h3 className="mt-3 text-xl font-bold">{e.title}</h3>
             <p className="text-cyan-300">{e.tagline}</p>
 
