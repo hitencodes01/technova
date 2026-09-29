@@ -59,6 +59,7 @@ function checkMember(m, p, needEmail, errs) {
 }
 
 export default function RegisterForm() {
+  const [isopen, setIsOpen] = useState(true)
   const [teamName, setTeamName] = useState("");
   const [college, setCollege] = useState("CMS");
   const [teamSize, setTeamSize] = useState(2);
@@ -72,6 +73,7 @@ export default function RegisterForm() {
   const [status, setStatus] = useState("idle"); // idle | submitting | done
   const [serverError, setServerError] = useState("");
   const [result, setResult] = useState(null);
+
 
   const amount = calcFee(events.length);
 
@@ -188,9 +190,8 @@ export default function RegisterForm() {
         <div className="mt-4 flex gap-3 text-sm">
           {[2, 1].map((n) => (
             <button type="button" key={n} onClick={() => changeTeamSize(n)}
-              className={`rounded-lg border px-4 py-2 ${
-                teamSize === n ? "border-cyan-400 bg-cyan-400/10 text-cyan-300" : "border-white/15"
-              }`}>
+              className={`rounded-lg border px-4 py-2 ${teamSize === n ? "border-cyan-400 bg-cyan-400/10 text-cyan-300" : "border-white/15"
+                }`}>
               {n === 2 ? "Team of 2" : "Individual"}
             </button>
           ))}
@@ -211,9 +212,8 @@ export default function RegisterForm() {
             const locked = teamSize === 1 && TEAM_ONLY.includes(e.id);
             return (
               <label key={e.id}
-                className={`flex items-start gap-3 rounded-lg border border-white/10 p-3 text-sm ${
-                  locked ? "opacity-40" : "cursor-pointer hover:border-cyan-400/50"
-                }`}>
+                className={`flex items-start gap-3 rounded-lg border border-white/10 p-3 text-sm ${locked ? "opacity-40" : "cursor-pointer hover:border-cyan-400/50"
+                  }`}>
                 <input type="checkbox" disabled={locked} checked={events.includes(e.id)}
                   onChange={() => toggleEvent(e.id)} className="mt-1" />
                 <span>
@@ -234,17 +234,18 @@ export default function RegisterForm() {
         <legend className="px-2 text-sm font-semibold text-cyan-300">Payment</legend>
 
         <p className="text-xs text-slate-400">
-          ₹{PRICE_PER_EVENT} per event. Select all 4 events and pay only ₹{ALL_FOUR_PER_EVENT} per event
+          ₹{PRICE_PER_EVENT} per event. Select all 4 events and pay only
           (₹{calcFee(4)} total).
         </p>
 
         {events.length === 0 ? (
           <p className="mt-4 text-sm text-slate-400">
-            Pehle upar se events select karo, phir payment QR dikhega.
+            Firstly select the events in which you want to participate then pay through UPI.
+
           </p>
         ) : (
           <div className="mt-4 flex flex-col items-start gap-6 sm:flex-row">
-            <img src={`/upi-${amount}.png`} alt={`Pay ₹${amount}`}
+            <img src={`/img/upi-${amount}.jpeg`} alt={`Pay ₹${amount}`}
               className="h-56 w-56 rounded-lg bg-white object-contain p-2" />
             <div className="space-y-2 text-sm">
               <p className="text-slate-300">
@@ -252,7 +253,7 @@ export default function RegisterForm() {
                 <b className="text-2xl text-cyan-300">₹{amount}</b>
               </p>
               <p className="text-slate-400">
-                Exactly ₹{amount} pay karo, phir transaction ID daalo aur screenshot upload karo.
+                Pay ₹{amount} exactly amount, then enter <b>Transaction ID </b>and upload <b>Screenshot</b> of payment.
               </p>
             </div>
           </div>
@@ -286,8 +287,8 @@ export default function RegisterForm() {
         {status === "submitting"
           ? "Submitting… please don't close this page"
           : amount > 0
-          ? `Submit registration (₹${amount})`
-          : "Submit registration"}
+            ? `Submit registration (₹${amount})`
+            : "Submit registration"}
       </button>
     </form>
   );
