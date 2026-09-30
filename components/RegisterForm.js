@@ -209,17 +209,16 @@ export default function RegisterForm() {
         <legend className="px-2 text-sm font-semibold text-cyan-300">Events *</legend>
         <div className="grid gap-3 sm:grid-cols-2">
           {EVENTS.map((e) => {
-            const locked = teamSize === 1 && TEAM_ONLY.includes(e.id);
             return (
               <label key={e.id}
-                className={`flex items-start gap-3 rounded-lg border border-white/10 p-3 text-sm ${locked ? "opacity-40" : "cursor-pointer hover:border-cyan-400/50"
+                className={`flex items-start gap-3 rounded-lg border border-white/10 p-3 text-sm cursor-pointer hover:border-cyan-400/50"
                   }`}>
-                <input type="checkbox" disabled={locked} checked={events.includes(e.id)}
+                <input type="checkbox"  checked={events.includes(e.id)}
                   onChange={() => toggleEvent(e.id)} className="mt-1" />
                 <span>
                   <span className="block font-medium">{e.title}</span>
                   <span className="text-slate-400">
-                    {locked ? "Teams of 2 only" : e.participants}
+                    {e.participants}
                   </span>
                 </span>
               </label>

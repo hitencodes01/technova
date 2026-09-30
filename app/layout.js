@@ -5,8 +5,8 @@ export const metadata = {
   description:
     "TechNova 2026 – one-day tech fest: Tech AI Quiz, Code Clash, Build It and Shark Pitch Battle. 13 October 2026.",
   icons: {
-    icon: "logos/technova.jpeg",
-  }
+    icon: "/technova.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
