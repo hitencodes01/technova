@@ -8,7 +8,7 @@ export default function Team() {
         {COMMITTEE.map(([role, name]) => (
           <div key={role + name} className="rounded-xl border border-white/50 bg-white/5 p-5">
             <p className="text-sm text-cyan-300">{role}</p>
-            <p className="mt-1 font-semibold">{name}</p>
+            <p className="mt-1 font-semibold">{typeof (name) == "string" ? name : name.map((item, index) => { return <div key={index}>{item}</div> })}</p>
           </div>
         ))}
       </div>

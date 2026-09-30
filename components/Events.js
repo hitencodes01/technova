@@ -16,8 +16,8 @@ export default function Events() {
             <dl className="mt-4 grid grid-cols-2 gap-2 text-sm text-slate-300">
               <div><dt className="text-slate-500">Duration</dt><dd>{e.duration}</dd></div>
               <div><dt className="text-slate-500">Participants</dt><dd>{e.participants}</dd></div>
-              <div><dt className="text-slate-500">Faculty</dt>{e.facultyCoord.map((item) => { return `<dd>${item}</dd>` })}</div>
-              <div><dt className="text-slate-500">Student</dt>{e.studentCoord.map((item) => { return `<dd>${item}</dd>` })}</div>
+              <div><dt className="text-slate-500">Faculty</dt>{e.facultyCoord.map((item,index) => { return <dd key={index}>{item}</dd> })}</div>
+              <div><dt className="text-slate-500">Student</dt>{e.studentCoord.map((item,index) => { return <dd key={index}>{item}</dd> })}</div>
             </dl>
 
             <details className="mt-4 group">
