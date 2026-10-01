@@ -8,7 +8,7 @@ import { calcFee, PRICE_PER_EVENT, ALL_FOUR_PER_EVENT } from "@/lib/pricing";
 const TEAM_ONLY = ["quiz", "build","code","pitch"];
 const input =
   "w-full rounded-lg border border-white/15 bg-slate-900 px-3 py-2 text-sm outline-none focus:border-cyan-400";
-const emptyMember = { name: "", email: "", phone: "", aadhaar: "", course: "" };
+const emptyMember = { name: "", email: "", phone: "", aadhar: "", course: "" };
 const emailRe = /^\S+@\S+\.\S+$/;
 
 function Field({ label, error, children }) {
@@ -37,8 +37,8 @@ function Member({ title, data, onChange, errors, prefix, needEmail }) {
           <input type="tel" inputMode="numeric" maxLength={10} className={input}
             value={data.phone} onChange={set("phone")} />
         </Field>
-        <Field label="Aadhaar no. *" error={errors[prefix + "aadgaar"]}>
-          <input className={input} value={data.aadhaar} onChange={set("aadhaar")} />
+        <Field label="Aadhar no. *" error={errors[prefix + "aadhar"]}>
+          <input className={input} value={data.aadhar} onChange={set("aadhar")} />
         </Field>
         <Field label="Course & year *" error={errors[prefix + "course"]}>
           <input className={input} placeholder="e.g. BCA 2nd year" value={data.course}
@@ -54,7 +54,7 @@ function checkMember(m, p, needEmail, errs) {
   if (needEmail && !emailRe.test(m.email)) errs[p + "email"] = "Enter a valid email";
   if (!needEmail && m.email && !emailRe.test(m.email)) errs[p + "email"] = "Enter a valid email";
   if (!/^\d{10}$/.test(m.phone)) errs[p + "phone"] = "Enter a 10-digit number";
-  if (!m.aadhaar.trim()) errs[p + "aadhaar"] = "Required";
+  if (!m.aadhar.trim()) errs[p + "aadhar"] = "Required";
   if (!m.course.trim()) errs[p + "course"] = "Required";
 }
 
@@ -70,7 +70,7 @@ export default function RegisterForm() {
   const [file, setFile] = useState(null);
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | submitting | done
+  const [status, setStatus] = useState("idle"); 
   const [serverError, setServerError] = useState("");
   const [result, setResult] = useState(null);
 
@@ -276,6 +276,7 @@ export default function RegisterForm() {
 
       {serverError && (
         <p className="rounded-lg border border-red-400/40 bg-red-400/10 p-3 text-sm text-red-300">
+          {console.log(serverError)}
           {serverError}
         </p>
       )}
