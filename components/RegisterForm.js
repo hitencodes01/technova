@@ -5,10 +5,10 @@ import { SCRIPT_URL } from "@/lib/config";
 import { compressImage } from "@/lib/compressImage";
 import { calcFee, PRICE_PER_EVENT, ALL_FOUR_PER_EVENT } from "@/lib/pricing";
 
-const TEAM_ONLY = ["quiz", "build"];
+const TEAM_ONLY = ["quiz", "build","code","pitch"];
 const input =
   "w-full rounded-lg border border-white/15 bg-slate-900 px-3 py-2 text-sm outline-none focus:border-cyan-400";
-const emptyMember = { name: "", email: "", phone: "", enrollment: "", course: "" };
+const emptyMember = { name: "", email: "", phone: "", aadhaar: "", course: "" };
 const emailRe = /^\S+@\S+\.\S+$/;
 
 function Field({ label, error, children }) {
@@ -37,8 +37,8 @@ function Member({ title, data, onChange, errors, prefix, needEmail }) {
           <input type="tel" inputMode="numeric" maxLength={10} className={input}
             value={data.phone} onChange={set("phone")} />
         </Field>
-        <Field label="Enrollment no. *" error={errors[prefix + "enrollment"]}>
-          <input className={input} value={data.enrollment} onChange={set("enrollment")} />
+        <Field label="Aadhaar no. *" error={errors[prefix + "aadgaar"]}>
+          <input className={input} value={data.aadhaar} onChange={set("aadhaar")} />
         </Field>
         <Field label="Course & year *" error={errors[prefix + "course"]}>
           <input className={input} placeholder="e.g. BCA 2nd year" value={data.course}
@@ -54,7 +54,7 @@ function checkMember(m, p, needEmail, errs) {
   if (needEmail && !emailRe.test(m.email)) errs[p + "email"] = "Enter a valid email";
   if (!needEmail && m.email && !emailRe.test(m.email)) errs[p + "email"] = "Enter a valid email";
   if (!/^\d{10}$/.test(m.phone)) errs[p + "phone"] = "Enter a 10-digit number";
-  if (!m.enrollment.trim()) errs[p + "enrollment"] = "Required";
+  if (!m.aadhaar.trim()) errs[p + "aadhaar"] = "Required";
   if (!m.course.trim()) errs[p + "course"] = "Required";
 }
 
@@ -77,10 +77,9 @@ export default function RegisterForm() {
 
   const amount = calcFee(events.length);
 
-  function changeTeamSize(n) {
-    setTeamSize(n);
-    if (n === 1) setEvents((prev) => prev.filter((id) => !TEAM_ONLY.includes(id)));
-  }
+ function changeTeamSize(n) {
+  setTeamSize(n);
+}
 
   function toggleEvent(id) {
     setEvents((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -198,7 +197,7 @@ export default function RegisterForm() {
         </div>
       </fieldset>
 
-      <Member title="Member 1 (team leader)" data={m1} onChange={setM1} errors={errors}
+      <Member title="Member 1 (Team Leader)" data={m1} onChange={setM1} errors={errors}
         prefix="m1_" needEmail />
       {teamSize === 2 && (
         <Member title="Member 2" data={m2} onChange={setM2} errors={errors} prefix="m2_" />
