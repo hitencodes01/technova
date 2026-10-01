@@ -5,7 +5,7 @@ import { SCRIPT_URL } from "@/lib/config";
 import { compressImage } from "@/lib/compressImage";
 import { calcFee, PRICE_PER_EVENT, ALL_FOUR_PER_EVENT } from "@/lib/pricing";
 
-const TEAM_ONLY = ["quiz", "build","code","pitch"];
+const TEAM_ONLY = ["quiz", "build", "code", "pitch"];
 const input =
   "w-full rounded-lg border border-white/15 bg-slate-900 px-3 py-2 text-sm outline-none focus:border-cyan-400";
 const emptyMember = { name: "", email: "", phone: "", aadhar: "", course: "" };
@@ -37,10 +37,10 @@ function Member({ title, data, onChange, errors, prefix, needEmail }) {
           <input type="tel" inputMode="numeric" maxLength={10} className={input}
             value={data.phone} onChange={set("phone")} />
         </Field>
-        <Field label="Aadhar no. *" error={errors[prefix + "aadhar"]}>
-          <input className={input} value={data.aadhar} onChange={set("aadhar")} />
+        <Field label="Aadhar No. *" error={errors[prefix + "aadhar"]}>
+          <input className={input} type="tel" inputMode="numeric" maxLength={12} value={data.aadhar} onChange={set("aadhar")} />
         </Field>
-        <Field label="Course & year *" error={errors[prefix + "course"]}>
+        <Field label="Course" error={errors[prefix + "course"]}>
           <input className={input} placeholder="e.g. BCA 2nd year" value={data.course}
             onChange={set("course")} />
         </Field>
@@ -70,16 +70,16 @@ export default function RegisterForm() {
   const [file, setFile] = useState(null);
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); 
+  const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
   const [result, setResult] = useState(null);
 
 
   const amount = calcFee(events.length);
 
- function changeTeamSize(n) {
-  setTeamSize(n);
-}
+  function changeTeamSize(n) {
+    setTeamSize(n);
+  }
 
   function toggleEvent(id) {
     setEvents((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -212,7 +212,7 @@ export default function RegisterForm() {
               <label key={e.id}
                 className={`flex items-start gap-3 rounded-lg border border-white/10 p-3 text-sm cursor-pointer hover:border-cyan-400/50"
                   }`}>
-                <input type="checkbox"  checked={events.includes(e.id)}
+                <input type="checkbox" checked={events.includes(e.id)}
                   onChange={() => toggleEvent(e.id)} className="mt-1" />
                 <span>
                   <span className="block font-medium">{e.title}</span>
