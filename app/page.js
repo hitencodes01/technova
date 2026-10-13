@@ -12,7 +12,9 @@ export default function Home() {
     <>
       <Navbar />
       <main>
-        <Hero />
+        <div className="mt-5">
+          <Hero />
+        </div>
         <About />
         <Events />
         <Schedule />

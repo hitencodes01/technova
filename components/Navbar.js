@@ -20,9 +20,9 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="/register"
+        <a href="/results"
            className="rounded-lg bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-cyan-300">
-          Register
+          Results
         </a>
       </nav>
     </header>
